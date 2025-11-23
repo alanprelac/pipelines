@@ -6,7 +6,6 @@ from pydantic import BaseModel
 
 class Valves(BaseModel):
     ASR_API_URL: str = "http://h1.maoio.eu:32772/asr"
-    API_KEY: str = ""
     ENCODE: bool = True
     TASK: str = "transcribe"
     VAD_FILTER: bool = False
@@ -37,8 +36,6 @@ class Pipeline:
             headers = {
                 'accept': 'application/json',
             }
-            if self.valves.API_KEY:  # Provjera da li postoji API ključ
-                headers['Authorization'] = f"Bearer {self.valves.API_KEY}"
             
             with open(audio_file_path, "rb") as audio_file:
                 files = {
